@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        imagePullPolicy: Never
+        image: wordp
+        resources:
+          limits:
+            memory: "1024Mi"
+            cpu: "1024m"
+        ports:
+        - containerPort: 80
+        - containerPort: 443

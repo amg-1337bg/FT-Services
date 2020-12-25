@@ -16,4 +16,4 @@ RUN echo '<h1>Brahim Amghough</h1><h2>Brahim Amghough</h2><h3>Brahim Amghough</h
 EXPOSE 80
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx", "-g", "daemon off;"]

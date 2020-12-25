@@ -5,10 +5,12 @@ RUN apk add nginx openrc php7-fpm php-session php7-common php7-iconv php7-json p
 
 RUN mkdir ./run/nginx
 
+#COPY nginx-selfsigned.crt ./etc/ssl/certs
+#COPY nginx-selfsigned.key ./etc/ssl/private
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY ./phpMyAdmin /var/www/localhost/htdocs/phpmyadmin
 
 RUN rc-status
 RUN touch run/openrc/softlevel
-
+EXPOSE 5000
 CMD service php-fpm7 start && service nginx start && tail -F /var/log/nginx/access.log

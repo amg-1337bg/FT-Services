@@ -1,3 +1,3 @@
 mysql -e "create database wordpress;
-grant all privileges on wordpress.* to 'u_wordpress'@'localhost' identified by 'p_wordpress';
+grant all privileges on wordpress.* to 'root'@'%' identified by 'toor';
 flush privileges;"

@@ -1,23 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deploy
+  name: wordpress-mysql
   labels:
-    app: nginx
+    app: wordpress
 spec:
   selector:
     matchLabels:
-      app: nginx
+      app: wordpress
   template:
     metadata:
       labels:
-        app: nginx
+        app: wordpress
     spec:
-      resources :
       containers:
-      - name: ngx-depl
+      - name: mysql
         imagePullPolicy: Never
-        image: ngx-depl
+        image: mys
         ports:
-          - containerPort: 80
-          - containerPort: 443
+        - containerPort: 3306
