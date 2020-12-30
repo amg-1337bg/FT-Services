@@ -11,4 +11,4 @@ COPY ./wordpress var/www/localhost/htdocs/wordpress
 RUN rc-status
 RUN touch run/openrc/softlevel
 EXPOSE 5050
-#CMD service php-fpm7 start && service nginx start && tail -F /var/log/nginx/access.log
+CMD service php-fpm7 start && service nginx start && tail -F /var/log/nginx/access.log

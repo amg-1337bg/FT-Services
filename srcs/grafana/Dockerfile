@@ -11,4 +11,8 @@ RUN wget http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/grafana-7.3.
 RUN apk add grafana-7.3.5-r1.apk
 RUN apk update
 
-CMD grafana-server -homepath grafana-7.3.5
+RUN mkdir /var/lib/grafana
+RUN mkdir /var/lib/grafana/dashboards
+COPY influxdb.json /var/lib/grafana/dashboards
+
+#CMD grafana-server -homepath grafana-7.3.
