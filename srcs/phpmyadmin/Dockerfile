@@ -9,8 +9,12 @@ RUN mkdir ./run/nginx
 #COPY nginx-selfsigned.key ./etc/ssl/private
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY ./phpMyAdmin /var/www/localhost/htdocs/phpmyadmin
+COPY telegraf-1.17.0-r0.apk .
+COPY telegraf.conf /etc
+
+RUN apk add telegraf-1.17.0-r0.apk
 
 RUN rc-status
 RUN touch run/openrc/softlevel
 EXPOSE 5000
-CMD service php-fpm7 start && service nginx start && tail -F /var/log/nginx/access.log
+CMD service php-fpm7 start && service nginx start && telegraf --config /etc/telegraf.conf
