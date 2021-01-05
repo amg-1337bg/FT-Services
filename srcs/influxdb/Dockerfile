@@ -8,7 +8,10 @@ RUN touch run/openrc/softlevel
 
 COPY create_databases.sh . 
 COPY telegraf-1.17.0-r0.apk .
+COPY telegraf.conf /etc/
 
+RUN wget http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/telegraf-openrc-1.17.0-r0.apk
+RUN apk add telegraf-openrc-1.17.0-r0.apk
 RUN apk add telegraf-1.17.0-r0.apk
 
-#CMD service influxdb start && sh create_databases.sh && telegraf --config etc/telegraf.conf
+#CMD service influxdb start && sh create_databases.sh && service telegraf start && tail -f /dev/null

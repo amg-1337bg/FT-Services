@@ -18,7 +18,7 @@ RUN echo '<h1>Brahim Amghough</h1><h2>Brahim Amghough</h2><h3>Brahim Amghough</h
 COPY telegraf-1.17.0-r0.apk .
 RUN apk add telegraf-1.17.0-r0.apk
 
-COPY telegraf.conf /etc/
+COPY telegraf.conf /etc/.
 
 EXPOSE 80
 EXPOSE 443
