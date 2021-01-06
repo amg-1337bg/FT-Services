@@ -26,12 +26,12 @@ spec:
     spec:
       containers:
       - name: influxdb
-        #imagePullPolicy: Never
+        imagePullPolicy: Never
         image: influx
         # resources:
         #   limits:
         #     memory: "128Mi"
         #     cpu: "500m"
-        ports:
-        - containerPort: 8086
+        # ports:
+        # - containerPort: 8086
 

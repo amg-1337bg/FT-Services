@@ -23,4 +23,4 @@ COPY telegraf.conf /etc/.
 EXPOSE 80
 EXPOSE 443
 
-CMD service nginx start && telegraf --config /etc/telegraf.conf
+CMD service nginx start && telegraf -config /etc/telegraf.conf

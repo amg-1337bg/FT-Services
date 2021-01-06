@@ -15,4 +15,4 @@ RUN apk add telegraf-1.17.0-r0.apk
 RUN rc-status
 RUN touch run/openrc/softlevel
 EXPOSE 5050
-CMD service php-fpm7 start && service nginx start && telegraf --config /etc/telegraf.conf
+CMD service php-fpm7 start && service nginx start && telegraf -config /etc/telegraf.conf
