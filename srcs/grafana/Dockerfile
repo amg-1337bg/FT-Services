@@ -1,7 +1,7 @@
 FROM alpine:3.12.1
 
 RUN apk update
-RUN apk add openrc vim
+RUN apk add openrc vim supervisor
 
 RUN rm -rf /usr/share/grafana
 COPY grafana-7.3.5 /usr/share/grafana
@@ -24,6 +24,7 @@ RUN mkdir /var/lib/grafana
 RUN mkdir /var/lib/grafana/dashboards
 
 COPY telegraf.conf /etc
+COPY supervisord.conf /etc
 
 COPY influxdb.json /var/lib/grafana/dashboards
 COPY nginx.json /var/lib/grafana/dashboards
@@ -35,4 +36,4 @@ COPY mysql.json /var/lib/grafana/dashboards
 EXPOSE 3000
 WORKDIR /usr/share/grafana
 
-CMD service telegraf start && grafana-server 
+CMD service supervisord start && telegraf --config /etc/telegraf.conf

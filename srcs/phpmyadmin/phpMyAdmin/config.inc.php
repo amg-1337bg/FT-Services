@@ -31,7 +31,6 @@ $i++;
 $cfg['Servers'][$i]['host'] = 'mysql-service';
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = false;
-$cfg['Servers'][$i]['ssl'];
 /**
  * phpMyAdmin configuration storage settings.
  */

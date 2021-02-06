@@ -1,7 +1,7 @@
 FROM alpine:3.12.1
 
 RUN apk update
-RUN apk add nginx openrc
+RUN apk add nginx openrc supervisor
 RUN mkdir ./run/nginx
 
 COPY nginx-selfsigned.crt ./etc/ssl/certs
@@ -10,6 +10,7 @@ COPY nginx-selfsigned.key ./etc/ssl/private
 RUN rc-status
 RUN touch /run/openrc/softlevel
 COPY Default.conf ./etc/nginx/conf.d/default.conf
+COPY supervisord.conf /etc/
 
 RUN touch var/www/localhost/htdocs/index.html
 
@@ -20,7 +21,9 @@ RUN apk add telegraf-1.17.0-r0.apk
 
 COPY telegraf.conf /etc/.
 
+#HEALTHCHECK --interval=5s --timeout=3s CMD service supervisord start && telegraf -config /etc/telegraf.conf 
+
 EXPOSE 80
 EXPOSE 443
 
-CMD service nginx start && telegraf -config /etc/telegraf.conf
+CMD service supervisord start && telegraf -config /etc/telegraf.conf

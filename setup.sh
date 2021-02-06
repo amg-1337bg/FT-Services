@@ -26,7 +26,6 @@ kubectl apply -f srcs/influxdb/influxdb_dp_svc.yaml
 kubectl apply -f srcs/grafana/grafa_dp_svc.yaml
 
 
-
 # kubectl apply -f srcs/mysql/mysql_service.yaml
 # kubectl apply -f srcs/wordpress/wp_service.yaml
 

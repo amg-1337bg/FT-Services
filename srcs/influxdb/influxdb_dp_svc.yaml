@@ -16,6 +16,7 @@ kind: Deployment
 metadata:
   name: influxdb
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: influxdb
