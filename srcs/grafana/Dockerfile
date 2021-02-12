@@ -1,7 +1,7 @@
 FROM alpine:3.12.1
 
 RUN apk update
-RUN apk add openrc vim supervisor
+RUN apk add openrc
 
 RUN rm -rf /usr/share/grafana
 COPY grafana-7.3.5 /usr/share/grafana
@@ -14,6 +14,9 @@ RUN touch /run/openrc/softlevel
 #RUN apk update
 RUN wget http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/grafana-7.3.7-r0.apk 
 RUN apk add grafana-7.3.7-r0.apk
+
+RUN wget	http://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/supervisor-4.2.1-r1.apk
+RUN apk add supervisor-4.2.1-r1.apk
 
 RUN wget http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/telegraf-openrc-1.17.0-r0.apk
 RUN apk add telegraf-openrc-1.17.0-r0.apk
@@ -36,4 +39,4 @@ COPY mysql.json /var/lib/grafana/dashboards
 EXPOSE 3000
 WORKDIR /usr/share/grafana
 
-CMD service supervisord start && telegraf --config /etc/telegraf.conf
+CMD service telegraf start && grafana-server

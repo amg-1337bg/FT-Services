@@ -1,7 +1,7 @@
 FROM alpine:3.12.1
 
 RUN apk update
-RUN apk add nginx openrc supervisor
+RUN apk add nginx openrc supervisor openssh
 RUN mkdir ./run/nginx
 
 COPY nginx-selfsigned.crt ./etc/ssl/certs
@@ -19,11 +19,15 @@ RUN echo '<h1>Brahim Amghough</h1><h2>Brahim Amghough</h2><h3>Brahim Amghough</h
 COPY telegraf-1.17.0-r0.apk .
 RUN apk add telegraf-1.17.0-r0.apk
 
+RUN adduser -D bamghoug
+RUN echo 'bamghoug:123' | chpasswd
+
 COPY telegraf.conf /etc/.
 
 #HEALTHCHECK --interval=5s --timeout=3s CMD service supervisord start && telegraf -config /etc/telegraf.conf 
 
 EXPOSE 80
 EXPOSE 443
+EXPOSE 22
 
 CMD service supervisord start && telegraf -config /etc/telegraf.conf

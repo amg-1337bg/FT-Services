@@ -15,7 +15,8 @@ spec:
       port: 80
     - name: https
       port: 443
-
+    - name: ssh
+      port: 22
 ---
 
 apiVersion: apps/v1
@@ -42,4 +43,5 @@ spec:
         ports:
           - containerPort: 80
           - containerPort: 443
+          - containerPort: 22
     
