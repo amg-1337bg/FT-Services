@@ -1,4 +1,20 @@
-if [$(pgrep nginx) != 0]
+pgrep nginx:
+
+if [ $? -gt 0 ]
 then
-        echo "hello from inside of if"
+        exit 1
+fi
+
+pgrep telegraf
+
+if [ $? -gt 0 ]
+then
+        exit 1
+fi
+
+pgrep sshd:
+
+if [ $? -gt 0 ]
+then
+        exit 1
 fi

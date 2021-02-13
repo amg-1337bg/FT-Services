@@ -17,6 +17,8 @@ COPY telegraf-1.17.0-r0.apk .
 COPY telegraf.conf /etc
 COPY supervisord.conf /etc
 COPY start.sh .
+COPY live.sh .
+COPY wordpress.sql .
 
 RUN apk add telegraf-1.17.0-r0.apk
 EXPOSE 3306

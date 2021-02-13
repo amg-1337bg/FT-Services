@@ -35,6 +35,9 @@ COPY grafana.json /var/lib/grafana/dashboards
 COPY wordpress.json /var/lib/grafana/dashboards
 COPY phpmyadmin.json /var/lib/grafana/dashboards
 COPY mysql.json /var/lib/grafana/dashboards
+COPY ftps.json /var/lib/grafana/dashboards
+
+COPY    live.sh .
 
 EXPOSE 3000
 WORKDIR /usr/share/grafana

@@ -41,6 +41,13 @@ spec:
       - name: influxdb
         imagePullPolicy: Never
         image: influx
+        livenessProbe:
+            exec:
+              command:
+              - sh
+              - /live.sh
+            initialDelaySeconds: 10
+            periodSeconds: 5
         volumeMounts:
         - name: influxdb-persistent-storage
           mountPath: /var/lib/influxdb

@@ -36,3 +36,10 @@ spec:
         image: phpmy
         ports:
         - containerPort: 5000
+        livenessProbe:
+            exec:
+              command:
+              - sh
+              - /live.sh
+            initialDelaySeconds: 10
+            periodSeconds: 5

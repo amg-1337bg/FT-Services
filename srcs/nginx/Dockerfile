@@ -1,7 +1,7 @@
 FROM alpine:3.12.1
 
 RUN apk update
-RUN apk add nginx openrc supervisor openssh
+RUN apk add nginx openrc openssh
 RUN mkdir ./run/nginx
 
 COPY nginx-selfsigned.crt ./etc/ssl/certs
@@ -10,7 +10,6 @@ COPY nginx-selfsigned.key ./etc/ssl/private
 RUN rc-status
 RUN touch /run/openrc/softlevel
 COPY Default.conf ./etc/nginx/conf.d/default.conf
-COPY supervisord.conf /etc/
 
 RUN touch var/www/localhost/htdocs/index.html
 
@@ -23,11 +22,10 @@ RUN adduser -D bamghoug
 RUN echo 'bamghoug:123' | chpasswd
 
 COPY telegraf.conf /etc/.
-
-#HEALTHCHECK --interval=5s --timeout=3s CMD service supervisord start && telegraf -config /etc/telegraf.conf 
+COPY live.sh .
 
 EXPOSE 80
 EXPOSE 443
 EXPOSE 22
 
-CMD service supervisord start && telegraf -config /etc/telegraf.conf
+CMD service nginx start && service sshd start && telegraf -config /etc/telegraf.conf
