@@ -18,5 +18,9 @@ RUN apk add telegraf-1.17.0-r0.apk
 
 COPY vsftpd.conf /etc/vsftpd/
 COPY telegraf.conf /etc
+COPY live.sh .
 
-CMD service vsftpd start && telegraf -config /etc/telegraf.conf
+EXPOSE 21
+EXPOSE 50110
+
+CMD service vsftpd start && telegraf -config /etc/telegraf.conf && tail -f dev/null

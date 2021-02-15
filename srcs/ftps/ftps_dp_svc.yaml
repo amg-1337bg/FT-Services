@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ftps-service
+  name: ftps
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
   labels:
@@ -15,17 +15,13 @@ spec:
       port: 21
     - name: ftps-1
       port: 50110
-    - name: ftps-2
-      port: 50111
-    - name: ftps-3
-      port: 50112
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ftps-deploy
+  name: ftps
   labels:
     app: ftps
 spec:
@@ -42,10 +38,15 @@ spec:
       containers:
       - name: ftps
         imagePullPolicy: Never
-        image: ftp
+        image: ftps
         ports:
           - containerPort: 21
           - containerPort: 50110
-          - containerPort: 50111
-          - containerPort: 50112
+        livenessProbe:
+            exec:
+              command:
+              - sh
+              - /live.sh
+            initialDelaySeconds: 10
+            periodSeconds: 5
     

@@ -15,7 +15,7 @@ docker build -t wordp srcs/wordpress/
 docker build -t phpmy srcs/phpmyadmin/
 docker build -t influx srcs/influxdb/
 docker build -t grafa srcs/grafana/
-docker build -t ftp srcs/ftps
+docker build -t ftps srcs/ftps
 
 
 #echo "-----------Create Volumes---------"

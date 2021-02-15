@@ -5,7 +5,7 @@ then
         exit 1
 fi
 
-pgrep influxd
+pgrep /usr/sbin/influxd
 
 if [ $? -gt 0 ]
 then

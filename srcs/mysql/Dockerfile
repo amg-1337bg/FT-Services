@@ -23,4 +23,3 @@ COPY wordpress.sql .
 RUN apk add telegraf-1.17.0-r0.apk
 EXPOSE 3306
 CMD sh start.sh
-#CMD service mariadb start && service supervisord start && sh add_db.sh && telegraf --config /etc/telegraf.conf
