@@ -10,17 +10,16 @@ RUN echo 'bamghoug:123' | chpasswd
 RUN mkdir /home/bamghoug/ftp
 RUN chmod -R 774 /home/bamghoug/ftp
 
-COPY vsftpd.crt /etc/ssl
-COPY vsftpdk.key /etc/ssl
-COPY telegraf-1.17.0-r0.apk .
+COPY srcs/vsftpd.crt /etc/ssl
+COPY srcs/vsftpdk.key /etc/ssl
+COPY srcs/telegraf-1.17.0-r0.apk .
+COPY srcs/vsftpd.conf /etc/vsftpd/
+COPY srcs/telegraf.conf /etc
+COPY srcs/live.sh .
 
 RUN apk add telegraf-1.17.0-r0.apk
-
-COPY vsftpd.conf /etc/vsftpd/
-COPY telegraf.conf /etc
-COPY live.sh .
 
 EXPOSE 21
 EXPOSE 50110
 
-CMD service vsftpd start && telegraf -config /etc/telegraf.conf && tail -f dev/null
+CMD service vsftpd start && telegraf -config /etc/telegraf.conf
